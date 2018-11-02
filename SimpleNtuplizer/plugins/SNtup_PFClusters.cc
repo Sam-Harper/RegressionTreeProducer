@@ -1,11 +1,11 @@
 #include "SimpleNtuplizer.h"
 
-namespace {
-  typedef reco::PFCluster::EEtoPSAssociation::value_type EEPSPair;
-  bool sortByKey(const EEPSPair& a, const EEPSPair& b) {
-    return a.first < b.first;
-  } 
-}
+// namespace {
+//   typedef reco::PFCluster::EEtoPSAssociation::value_type EEPSPair;
+//   bool sortByKey(const EEPSPair& a, const EEPSPair& b) {
+//     return a.first < b.first;
+//   } 
+// }
 
 void SimpleNtuplizer::setPFVariables(const edm::Event& iEvent, 
 				     const edm::EventSetup& iSetup)
@@ -157,7 +157,7 @@ void SimpleNtuplizer::setPFVariables(const edm::Event& iEvent,
       //std::cout<<" clusrawE "<<clusrawE_pf<<std::endl;
       ///////PS energy
       //compute preshower energies for endcap clusters
-      double ePS1=0, ePS2=0;
+      //double ePS1=0, ePS2=0;
       if(!iseb) {
 	/*
 	auto ee_key_val = std::make_pair(nClus_pf,edm::Ptr<reco::PFCluster>());

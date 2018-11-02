@@ -95,6 +95,7 @@ SimpleNtuplizer::SimpleNtuplizer(const edm::ParameterSet& iConfig):
     electronTree_->Branch("eventNumber", &eventNumber_e);
     electronTree_->Branch("luminosityBlock", &luminosityBlock_e);
     electronTree_->Branch("run", &run_e);
+    electronTree_->Branch("trueNumInteractions", &trueNumInteractions_);	
     electronTree_->Branch("isMatched", &isMatched_e);
 
     electronTree_->Branch("eta", &eta_e);
@@ -125,7 +126,7 @@ SimpleNtuplizer::SimpleNtuplizer(const edm::ParameterSet& iConfig):
     electronTree_->Branch("isEERingGap", &isEERingGap_e);
 
     electronTree_->Branch("rhoValue", &rhoValue_e);
-
+    if(doVertex) photonTree_->Branch("nPV", &nPV_);
     electronTree_->Branch("seedEnergy", &seedEnergy_e);
     electronTree_->Branch("numberOfClusters", &numberOfClusters_e);
 
@@ -239,6 +240,7 @@ SimpleNtuplizer::SimpleNtuplizer(const edm::ParameterSet& iConfig):
     superClusterTree_->Branch("eventNumber", &eventNumber_c);
     superClusterTree_->Branch("luminosityBlock", &luminosityBlock_c);
     superClusterTree_->Branch("run", &run_c);
+    superClusterTree_->Branch("trueNumInteractions", &trueNumInteractions_);	
     superClusterTree_->Branch("isMatched", &isMatched_c);
 
     superClusterTree_->Branch("eta", &eta_c);
@@ -269,7 +271,7 @@ SimpleNtuplizer::SimpleNtuplizer(const edm::ParameterSet& iConfig):
     superClusterTree_->Branch("isEERingGap", &isEERingGap_c);
 
     superClusterTree_->Branch("rhoValue", &rhoValue_c);
-
+    if(doVertex) superClusterTree_->Branch("nPV", &nPV_);
     superClusterTree_->Branch("seedEnergy", &seedEnergy_c);
     superClusterTree_->Branch("numberOfClusters", &numberOfClusters_c);
 
@@ -359,6 +361,7 @@ SimpleNtuplizer::SimpleNtuplizer(const edm::ParameterSet& iConfig):
     photonTree_->Branch("eventNumber", &eventNumber_p);
     photonTree_->Branch("luminosityBlock", &luminosityBlock_p);
     photonTree_->Branch("run", &run_p);
+    photonTree_->Branch("trueNumInteractions", &trueNumInteractions_);	
     photonTree_->Branch("isMatched", &isMatched_p);
 
     photonTree_->Branch("eta", &eta_p);
@@ -389,7 +392,7 @@ SimpleNtuplizer::SimpleNtuplizer(const edm::ParameterSet& iConfig):
     photonTree_->Branch("isEERingGap", &isEERingGap_p);
 
     photonTree_->Branch("rhoValue", &rhoValue_p);
-
+    if(doVertex) photonTree_->Branch("nPV", &nPV_);
     photonTree_->Branch("seedEnergy", &seedEnergy_p);
     photonTree_->Branch("numberOfClusters", &numberOfClusters_p);
 
@@ -608,7 +611,7 @@ void SimpleNtuplizer::analyze( const edm::Event& iEvent, const edm::EventSetup& 
   if(doVertex){
     if (vertices->empty()) nPV_ = 0;
     else nPV_ = vertices->size();
-  }
+  }else nPV_=-1;
 
   //######################################
   //# Analyze electrons and photons
